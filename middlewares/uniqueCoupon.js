@@ -1,5 +1,5 @@
 // middlewares/uniqueCoupon.js
-const Coupon = require("../models/Coupon");
+const Coupon = require("../models/coupon");
 
 const checkUniqueCoupon = async (req, res, next) => {
   const { code } = req.body;
