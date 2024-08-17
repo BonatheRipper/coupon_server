@@ -1,10 +1,10 @@
 // routes/coupon.js
 const express = require("express");
 const router = express.Router();
-const Coupon = require("../models/Coupon.js");
+
 const generateCouponCode = require("../utils/generateCoupon");
 const checkUniqueCoupon = require("../middlewares/uniqueCoupon");
-
+const Coupon = require("../models/Coupon");
 // Generate Coupons
 router.post("/generate", async (req, res) => {
   const { quantity, expiryDate, price, prefix } = req.body;
