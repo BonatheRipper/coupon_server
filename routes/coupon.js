@@ -1,7 +1,7 @@
 // routes/coupon.js
 const express = require("express");
 const router = express.Router();
-const Coupon = require("../models/Coupon");
+const Coupon = require("../models/Coupon.js");
 const generateCouponCode = require("../utils/generateCoupon");
 const checkUniqueCoupon = require("../middlewares/uniqueCoupon");
 
@@ -43,17 +43,17 @@ router.delete("/delete/:id", async (req, res) => {
 // Use Coupon
 router.post("/use", async (req, res) => {
   const couponCode = req.body.couponCode;
-  console.log(couponCode);
+  // console.log(couponCode);
   try {
     const couponExist = await Coupon.findOne({ code: couponCode });
 
     if (!couponExist) {
-      console.log("No coupon matches the provided code.");
+      // console.log("No coupon matches the provided code.");
       return res.status(404).json({ error: "Coupon not found" });
     }
 
     if (couponExist.isUsed) {
-      console.log("Coupon code has already been used.");
+      // console.log("Coupon code has already been used.");
       return res
         .status(400)
         .json({ error: "Coupon code has already been used" });
@@ -65,7 +65,7 @@ router.post("/use", async (req, res) => {
     );
 
     if (coupon) {
-      console.log("Coupon found:", coupon);
+      // console.log("Coupon found:", coupon);
       const allCoupons = await Coupon.find({}).sort({ createdAt: -1 });
       res.status(200).json({
         status: "success",
@@ -73,7 +73,7 @@ router.post("/use", async (req, res) => {
         data: allCoupons,
       });
     } else {
-      console.log("No coupon matches the provided code.");
+      // console.log("No coupon matches the provided code.");
     }
   } catch (err) {
     console.error("Error occurred:", err);
