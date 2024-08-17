@@ -100,7 +100,7 @@ router.post("/verify", async (req, res) => {
     return res.status(404).json({ error: "Coupon not found." });
   }
 
-  if (coupon.isValid && new Date() < new Date(coupon.expiryDate)) {
+  if (!coupon.isUsed && new Date() < new Date(coupon.expiryDate)) {
     return res.json({ message: "Coupon is valid.", data: coupon });
   } else {
     return res
